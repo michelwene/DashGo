@@ -1,4 +1,4 @@
-import { createServer, Model, Factory } from "miragejs";
+import { createServer, Model, Factory, Response } from "miragejs";
 import { faker } from "@faker-js/faker";
 
 type User = {
@@ -28,7 +28,7 @@ export function makeServer() {
     },
 
     seeds(server) {
-      server.createList("user", 10);
+      server.createList("user", 200);
     },
 
     routes() {
@@ -47,7 +47,10 @@ export function makeServer() {
           pageStart,
           pageEnd
         );
+
+        return new Response(200, { "x-total-count": String(total) }, { users });
       });
+
       this.post("/users");
 
       this.namespace = "";
