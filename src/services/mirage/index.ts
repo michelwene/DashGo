@@ -2,15 +2,15 @@ import { createServer, Model, Factory, Response } from "miragejs";
 import { faker } from "@faker-js/faker";
 
 type User = {
-  name?: string;
-  email?: string;
-  created_at?: string;
+  name: string;
+  email: string;
+  created_at: string;
 };
 
 export function makeServer() {
   const server = createServer({
     models: {
-      user: Model.extend<User>({}),
+      user: Model.extend<Partial<User>>({}),
     },
 
     factories: {
